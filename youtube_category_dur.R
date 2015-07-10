@@ -19,7 +19,7 @@ plot <- ggplot(df, aes(color=category, fill=category, x=video_duration, y=norm))
 	facet_wrap(~ category, ncol=4, scales = "free_y") +
 	scale_x_continuous(limits = c(0,600), breaks = seq(0,600, by=60), labels = paste(0:10,"m",sep='')) +
 	geom_vline(aes(xintercept=med), size=0.20, data=df_medians, color="#1a1a1a", alpha=1, linetype="dashed") +
-	geom_text(aes(label = paste("Median —", secondsToString(med)), x=med-130), y=Inf, vjust=2, size=2, hjust=-1, family="Avenir Next Condensed Regular", data=df_medians, color="#1a1a1a", alpha=1) +
+	geom_text(aes(label = paste("Median —", secondsToString(med)), x=ifelse(med < 6*60,med-130, med-320)), y=Inf, vjust=2, size=2, hjust=-1, family="Avenir Next Condensed Regular", data=df_medians, color="#1a1a1a", alpha=1) +
 	
 	theme(axis.text.y = element_blank(), axis.title.y = element_blank(), panel.grid.major.y=element_blank()) +
 	labs(title = expression(atop("The Relationship Between YouTube Video Category and Length of the Video",scriptstyle(italic("Density Distribution of Video Durations for 11,159,063 YouTube Videos, by YouTube Category")))), x = expression("Video Duration  " ~ scriptstyle(italic("(# of Minutes)"))))
